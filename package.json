@@ -1,0 +1,19 @@
+{
+  "name": "bees-buzz",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "postpack": "tarball=$(npm list --depth 0 | sed 's/@/-/g; s/ .*/.tgz/g; 1q;'); tar -tf $tarball | sed 's/^package\\///' | zip -@r package; rm $tarball"
+  },
+  "files": [
+    "/index.js", 
+    "/lib"
+  ],
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  },
+  "bundledDependencies": [
+    "node-fetch"
+  ]
+}
