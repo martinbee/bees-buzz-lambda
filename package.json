@@ -11,9 +11,11 @@
     "/lib"
   ],
   "dependencies": {
+    "fast-xml-parser": "^3.19.0",
     "node-fetch": "^2.6.1"
   },
   "bundledDependencies": [
-    "node-fetch"
+    "node-fetch",
+    "fast-xml-parser"
   ]
 }
