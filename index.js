@@ -1,10 +1,13 @@
-const fetch = require('node-fetch')
+const getSSMSecret = require('./lib/getSSMSecret');
+const setUpNYTApi = require('./lib/setUpNYTApi');
 
-exports.handler = async (event) => {
-  const response = await fetch('https://api.coindesk.com/v1/bpi/currentprice.json')
-  const results = await response.json()
+exports.handler = async () => {
+  const nytAPIKey = await getSSMSecret('nyt-key');
+  console.log('key:', nytAPIKey);
+  const nytAPI = setUpNYTApi(nytAPIKey);
 
-  console.log(results)
+  const topStories = await nytAPI.getTopStories();
+  console.log(topStories);
 };
 
-exports.handler()
+exports.handler();
