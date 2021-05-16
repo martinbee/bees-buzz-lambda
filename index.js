@@ -2,6 +2,7 @@ const getSSMSecret = require('./lib/getSSMSecret');
 const getNytArticles = require('./lib/getNytArticles');
 const getBbcArticles = require('./lib/getBbcArticles');
 const getCnnArticles = require('./lib/getCnnArticles');
+const standardizeArticle = require('./lib/standardizeArticle');
 
 exports.handler = async () => {
   const nytAPIKey = await getSSMSecret('nyt-key');
@@ -12,9 +13,13 @@ exports.handler = async () => {
     await getCnnArticles(),
   ]);
 
-  articleGroups.forEach((group) =>
-    group.forEach((article) => console.log(article.source))
-  );
+  const articles = articleGroups.reduce((allArticles, group) => {
+    const groupArticles = group.map((article) => standardizeArticle(article));
+
+    return [...allArticles, ...groupArticles];
+  }, []);
+
+  console.log(articles);
 };
 
 exports.handler();
