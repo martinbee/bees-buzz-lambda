@@ -11,11 +11,13 @@
     "/lib"
   ],
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.16.0",
     "fast-xml-parser": "^3.19.0",
     "node-fetch": "^2.6.1"
   },
   "bundledDependencies": [
-    "node-fetch",
-    "fast-xml-parser"
+    "@aws-sdk/client-dynamodb",
+    "fast-xml-parser",
+    "node-fetch"
   ]
 }

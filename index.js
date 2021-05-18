@@ -4,6 +4,7 @@ const getBbcArticles = require('./lib/getBbcArticles');
 const getCnnArticles = require('./lib/getCnnArticles');
 const getEspnArticles = require('./lib/getEspnArticles');
 const standardizeArticle = require('./lib/standardizeArticle');
+const batchWriteToDb = require('./lib/batchWriteToDb');
 
 exports.handler = async () => {
   const nytAPIKey = await getSSMSecret('nyt-key');
@@ -21,7 +22,7 @@ exports.handler = async () => {
     return [...allArticles, ...groupArticles];
   }, []);
 
-  console.log(articles);
+  batchWriteToDb(articles);
 };
 
 exports.handler();
